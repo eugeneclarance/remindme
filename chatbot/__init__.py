@@ -16,7 +16,6 @@ import os
 
 app = Flask(__name__)
 sslify = SSLify(app)
-db.init_app(app)
 
 app.config.from_mapping(
     SECRET_KEY='dev',
@@ -55,8 +54,7 @@ def handle_message(event):
     text = event.message.text
 
     if isinstance(event.source, SourceUser):
-        print('okekekoekeookeoekoeokeokeoke')
-        print(event.source.user_id)
+        userid = event.source.user_id
 
     db = get_db()
     last_message = db.execute(
@@ -100,3 +98,4 @@ def handle_message(event):
 
 if __name__ == "__main__":
     app.run()
+    db.init_app(app)
