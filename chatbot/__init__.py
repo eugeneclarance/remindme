@@ -56,8 +56,8 @@ def handle_message(event):
     print(event.source)
     source = event.source
     print(source)
-    print(message["userId"])
-    print(message["user_id"])
+    print(event["userId"])
+    print(event["user_id"])
     # print(userid)
 
     db = get_db()
