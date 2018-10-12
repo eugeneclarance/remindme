@@ -56,10 +56,11 @@ def handle_message(event):
     if isinstance(event.source, SourceUser):
         user_id = event.source.user_id
 
+    x = 'SELECT message FROM messages WHERE userid = {} ORDER BY createdAt DESC LIMIT 2'.format(user_id)
+    print(x)
     db_instance = db.get_db()
     last_message = db_instance.execute(
-        'SELECT message FROM messages'
-        ' WHERE userid = {} ORDER BY createdAt DESC LIMIT 2'.format(user_id)
+        x
     )
 
     if text == 'set':
