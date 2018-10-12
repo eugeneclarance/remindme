@@ -56,7 +56,7 @@ def handle_message(event):
     if isinstance(event.source, SourceUser):
         user_id = event.source.user_id
 
-    x = 'SELECT message FROM messages WHERE userid = {} ORDER BY createdAt DESC LIMIT 2'.format(user_id)
+    x = 'SELECT message FROM messages WHERE userid = \"{}\" ORDER BY createdAt DESC LIMIT 2'.format(user_id)
     print(x)
     db_instance = db.get_db()
     last_message = db_instance.execute(
@@ -91,7 +91,7 @@ def handle_message(event):
     if len(last_message) == 2 and last_message[1] == 'set':
         db_instance.execute(
             'UPDATE reminders SET deadline'
-            ' WHERE id = (SELECT id FROM reminders WHERE userid = {} ORDER BY createdAt LIMIT 1)'.format(user_id),
+            ' WHERE id = (SELECT id FROM reminders WHERE userid = \"{}\" ORDER BY createdAt LIMIT 1)'.format(user_id),
             (text)
         )
         line_bot_api.reply_message(
