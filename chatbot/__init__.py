@@ -54,19 +54,19 @@ def handle_message(event):
     text = event.message.text
 
     if isinstance(event.source, SourceUser):
-        userid = event.source.user_id
+        user_id = event.source.user_id
 
     db_instance = db.get_db()
     last_message = db_instance.execute(
         'SELECT message FROM messages'
-        ' WHERE userid = {} ORDER BY createdAt DESC LIMIT 2'.format(userid)
+        ' WHERE userid = {} ORDER BY createdAt DESC LIMIT 2'.format(user_id)
     )
 
     if text == 'set':
         db_instance.execute(
             'INSERT INTO messages (userid, message)'
             ' VALUES (?, ?)',
-            (userid, text)
+            (user_id, text)
         )
         line_bot_api.reply_message(
             event.reply_token,
@@ -76,12 +76,12 @@ def handle_message(event):
         db_instance.execute(
             'INSERT INTO reminders (title, userid)'
             ' VALUES (?, ?)'
-            (text, userid)
+            (text, user_id)
         )
         db_instance.execute(
             'INSERT INTO messages (userid, message)'
             ' VALUES (?, ?)',
-            (userid, text)
+            (user_id, text)
         )
         line_bot_api.reply_message(
             event.reply_token,
@@ -90,7 +90,7 @@ def handle_message(event):
     if len(last_message) == 2 and last_message[1] == 'set':
         db_instance.execute(
             'UPDATE reminders SET deadline'
-            ' WHERE id = (SELECT id FROM reminders WHERE userid = {} ORDER BY createdAt LIMIT 1)'.format(userid),
+            ' WHERE id = (SELECT id FROM reminders WHERE userid = {} ORDER BY createdAt LIMIT 1)'.format(user_id),
             (text)
         )
         line_bot_api.reply_message(
