@@ -56,13 +56,13 @@ def handle_message(event):
     if isinstance(event.source, SourceUser):
         userid = event.source.user_id
 
-    db = db.get_db()
-    last_message = db.execute(
+    db_instance = db.get_db()
+    last_message = db_instance.execute(
         'SELECT message FROM messages WHERE userid = {} ORDER BY createdAt DESC LIMIT 2'.format(event.source.userId)
     )
 
     if text == 'set':
-        db.execute(
+        db_instance.execute(
             'INSERT INTO messages (userid, message)'
             ' VALUES (?, ?)',
             (userid, text)
@@ -72,12 +72,12 @@ def handle_message(event):
             TextSendMessage(text='Please tell me your reminder title..'))
 
     if len(last_message) == 1:
-        db.execute(
+        db_instance.execute(
             'INSERT INTO reminders (title, userid)'
             ' VALUES (?, ?)'
             (text, userid)
         )
-        db.execute(
+        db_instance.execute(
             'INSERT INTO messages (userid, message)'
             ' VALUES (?, ?)',
             (userid, text)
@@ -87,7 +87,7 @@ def handle_message(event):
             TextSendMessage(text='Please tell me your deadline..'))
 
     if len(last_message) == 2 and last_message[1] == 'set':
-        db.execute(
+        db_instance.execute(
             'UPDATE reminders SET deadline'
             ' WHERE id = (SELECT id FROM reminders WHERE userid = {} ORDER BY createdAt LIMIT 1)'.format(event.source.userId),
             (text)
