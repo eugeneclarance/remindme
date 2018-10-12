@@ -54,7 +54,7 @@ def callback():
 def handle_message(event):
     text = event.message.text
     # print(event.source["userId"])
-    print (type event.source)
+    print (type(event.source))
     # userid = event["source"]["userId"]
     # print(userid)
 
