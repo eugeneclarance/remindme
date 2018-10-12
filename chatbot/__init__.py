@@ -55,7 +55,7 @@ def handle_message(event):
     text = event.message.text
     # print(event.source["userId"])
     for prop in event.source:
-        print prop
+        print (prop)
     # userid = event["source"]["userId"]
     # print(userid)
 
