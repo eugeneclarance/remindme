@@ -10,7 +10,10 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
 
+from flask_sslify import SSLify
+
 app = Flask(__name__)
+sslify = SSLify(app)
 
 line_bot_api = LineBotApi('NYP3d/KQtGCgtUePkY+GeeKibo/XJIVkykzC85sDzdkm2y10v/vQuOAqdm0L7LnVk9oIpd8llgk6g6PaGJxOFpcRnpdCpC2xXq42JBw/jnqk6ZtQ/BiOIzuahbuQWqUqJqzzs9wCZZ5srMW/iRzllQdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('ed4502914a6d64e62082db3af4f2fecd')
