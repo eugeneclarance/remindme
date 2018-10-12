@@ -53,7 +53,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     text = event.message.text
-    print(event.source)
+    print(event.source["userId"])
     # userid = event["source"]["userId"]
     # print(userid)
 
