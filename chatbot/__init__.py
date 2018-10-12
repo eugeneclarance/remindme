@@ -56,7 +56,7 @@ def handle_message(event):
     if isinstance(event.source, SourceUser):
         userid = event.source.user_id
 
-    db = get_db()
+    db = db.get_db()
     last_message = db.execute(
         'SELECT message FROM messages WHERE userid = {} ORDER BY createdAt DESC LIMIT 2'.format(event.source.userId)
     )
