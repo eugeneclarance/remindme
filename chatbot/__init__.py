@@ -7,7 +7,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
+    MessageEvent, TextMessage, TextSendMessage
 )
 
 from flask_sslify import SSLify
@@ -56,9 +56,7 @@ def handle_message(event):
     print(event.source)
     source = event.source
     print(source)
-    print(source["userId"])
-    userid = source.userId
-    print(userid)
+    print(source["user_id"])
     # print(userid)
 
     db = get_db()
