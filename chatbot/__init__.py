@@ -52,7 +52,6 @@ def handle_message(event):
     last_message = db_instance.execute(
         'SELECT message FROM messages WHERE userid = \"{}\" ORDER BY createdAt DESC LIMIT 2'.format(user_id)
     )
-    print(last_message)
 
     if text == 'set':
         db_instance.execute(
@@ -64,7 +63,7 @@ def handle_message(event):
             event.reply_token,
             TextSendMessage(text='Please tell me your reminder title..'))
 
-    length = last_message.fetchall()
+    length = len(last_message.fetchall())
     if length == 1:
         db_instance.execute(
             'INSERT INTO reminders (title, userid)'
