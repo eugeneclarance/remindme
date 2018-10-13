@@ -34,18 +34,18 @@ from linebot.models import (
 app = Flask(__name__)
 sslify = SSLify(app)
 
-# get channel_secret and channel_access_token from your environment variable
-channel_secret = os.getenv('ed4502914a6d64e62082db3af4f2fecd', None)
-channel_access_token = os.getenv('NYP3d/KQtGCgtUePkY+GeeKibo/XJIVkykzC85sDzdkm2y10v/vQuOAqdm0L7LnVk9oIpd8llgk6g6PaGJxOFpcRnpdCpC2xXq42JBw/jnqk6ZtQ/BiOIzuahbuQWqUqJqzzs9wCZZ5srMW/iRzllQdB04t89/1O/w1cDnyilFU=', None)
-if channel_secret is None:
-    print('Specify LINE_CHANNEL_SECRET as environment variable.')
-    sys.exit(1)
-if channel_access_token is None:
-    print('Specify LINE_CHANNEL_ACCESS_TOKEN as environment variable.')
-    sys.exit(1)
+# # get channel_secret and channel_access_token from your environment variable
+# channel_secret = os.getenv('ed4502914a6d64e62082db3af4f2fecd', None)
+# channel_access_token = os.getenv('NYP3d/KQtGCgtUePkY+GeeKibo/XJIVkykzC85sDzdkm2y10v/vQuOAqdm0L7LnVk9oIpd8llgk6g6PaGJxOFpcRnpdCpC2xXq42JBw/jnqk6ZtQ/BiOIzuahbuQWqUqJqzzs9wCZZ5srMW/iRzllQdB04t89/1O/w1cDnyilFU=', None)
+# if channel_secret is None:
+#     print('Specify LINE_CHANNEL_SECRET as environment variable.')
+#     sys.exit(1)
+# if channel_access_token is None:
+#     print('Specify LINE_CHANNEL_ACCESS_TOKEN as environment variable.')
+#     sys.exit(1)
 
-line_bot_api = LineBotApi(channel_access_token)
-handler = WebhookHandler(channel_secret)
+line_bot_api = LineBotApi('NYP3d/KQtGCgtUePkY+GeeKibo/XJIVkykzC85sDzdkm2y10v/vQuOAqdm0L7LnVk9oIpd8llgk6g6PaGJxOFpcRnpdCpC2xXq42JBw/jnqk6ZtQ/BiOIzuahbuQWqUqJqzzs9wCZZ5srMW/iRzllQdB04t89/1O/w1cDnyilFU=')
+handler = WebhookHandler('ed4502914a6d64e62082db3af4f2fecd')
 
 static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
 
